@@ -1,12 +1,17 @@
 require "sinatra"
 require "sinatra/reloader"
 
+#ROOT
+get '/' do
+  erb :index, layout: :main
+end
 
-get "/" do
+#SUBMIT FORM
+post '/encode' do
   word = params["word"]
-  offset = params["offset"].to_i
-  encoded = caeser_cipher(word, offset)
-  erb :index, layout: :main, :locals => {:encoded => encoded}
+  offset = params["offset"]
+  encoded = caeser_cipher(word,offset)
+  erb :encoded, layout: :main, :locals => {:encoded => encoded}
 end
 
 def caeser_cipher(someString, shift)
@@ -22,7 +27,7 @@ def caeser_cipher(someString, shift)
       index = upCase.index(x)
       newNum = index.to_i + shift.to_i
       until newNum <= 26
-        newNum = newNum - 26
+        newNum = newNum - 25
       end
       newLet = upCase[newNum]
 

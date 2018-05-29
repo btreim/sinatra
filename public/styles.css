@@ -1,4 +1,6 @@
-
+body {
+	font-family: 'Muli', sans-serif;
+}
 div {
 	margin: auto;
 	width: 50%;
